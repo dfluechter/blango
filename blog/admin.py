@@ -1,9 +1,14 @@
 from django.contrib import admin
-from blog.models import Tag, Post
-# Register your models here.
-admin.site.register(Tag)
+from .models import Post, Comment, Tag
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
     list_display = ('slug', 'published_at')
-admin.site.register(Post, PostAdmin)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('creator', 'content', 'created_at')
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('value',)
